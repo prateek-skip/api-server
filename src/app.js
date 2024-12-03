@@ -17,7 +17,7 @@ app.use(bodyParser.json());
 // API Key Validation Middleware
 const apiKeyValidation = (req, res, next) => {
     const apiKey = req.header('x-api-key');
-    const validApiKey = '6666-8888-999'; // Replace with your actual API key
+    const validApiKey = '030faf4b-f8f0-4c8a-8ad6-c68fed9acb07'; // Replace with your actual API key
 
     if (!apiKey || apiKey !== validApiKey) {
         return res.status(401).json({ error: 'Invalid or missing API key. Try again' });

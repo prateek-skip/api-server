@@ -4,7 +4,7 @@ const bodyParser = require('body-parser');
 
 //routes 
 const authorsRoutes = require('./api/routes/authors');
-const booksRoutes = require('./api/routes/books');
+const challanRoutes = require('./api/routes/challan');
 
 
 app.use(bodyParser.urlencoded({ extended: false }));
@@ -46,9 +46,8 @@ app.use((req, res, next) => {
 
 
 app.use('/advance-rc', authorsRoutes);
-app.use('/books', booksRoutes);
+app.use('/challan', challanRoutes);
 
- 
 
 // Error Handling Middleware
 app.use((req, res, next) => {

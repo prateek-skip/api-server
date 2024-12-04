@@ -31,13 +31,4 @@ router.post("/search/mhChallan", async (req, res, next) => {
 });
 
 
-/**
- * GET request to /books/:id
- */
-router.get('/:id', (req, res, next) => {
-    res.status(200).json({
-        message: 'Book with id was fetch'
-    });
-});
-
 module.exports = router;

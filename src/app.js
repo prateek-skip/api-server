@@ -1,7 +1,8 @@
 const express = require('express');
 const app = express();
 const bodyParser = require('body-parser');
-
+const winston = require('winston');
+const validApiKey = {'030faf4b-f8f0-4c8a-8ad6-c68fed9acb07':"cred",'aeded234-800e-4404-9fa6-8e0048dabdc1':"acko"}; // Replace with your actual API key
 //routes 
 const authorsRoutes = require('./api/routes/authors');
 const challanRoutes = require('./api/routes/challan');
@@ -17,9 +18,10 @@ app.use(bodyParser.json());
 // API Key Validation Middleware
 const apiKeyValidation = (req, res, next) => {
     const apiKey = req.header('x-api-key');
-    const validApiKey = '030faf4b-f8f0-4c8a-8ad6-c68fed9acb07'; // Replace with your actual API key
 
-    if (!apiKey || apiKey !== validApiKey) {
+
+
+    if (!validApiKey[apiKey]) {
         return res.status(401).json({ error: 'Invalid or missing API key. Try again' });
     }
     next();
@@ -28,6 +30,36 @@ const apiKeyValidation = (req, res, next) => {
 // Apply API Key Validation to all routes
 app.use(apiKeyValidation);
 
+
+// Create a Winston logger
+const logger = winston.createLogger({
+  level: 'info',
+  format: winston.format.combine(
+      winston.format.timestamp(),
+      winston.format.printf(({ timestamp, level, message }) => {
+          return `${timestamp} [${level.toUpperCase()}]: ${message}`;
+      })
+  ),
+  transports: [
+      new winston.transports.File({ filename: 'logs/api-usage.log' })
+  ],
+});
+
+app.use((req, res, next) => {
+  const userId = req.headers['x-api-key']; // Assume user ID is passed in headers
+  const apiPath = req.path;
+
+  if (!userId) {
+      logger.warn('Missing API Key in request headers');
+      return res.status(400).json({ error: 'User ID is required' });
+  }
+
+  const logMessage = `User ${validApiKey[userId]} with API key ${userId} accessed ${apiPath}`;
+  logger.info(logMessage);
+  // console.log(logMessage); // Optional: Log to console as well
+
+  next();
+});
 
 
 app.use((req, res, next) => {

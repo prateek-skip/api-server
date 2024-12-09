@@ -9,8 +9,8 @@ module.exports = {
         const phoneNumber = reqBody['phoneNoforOtpMH']
         const statePortals = reqBody['statePortal']
 
-        const apiUrl = 'https://api-preproduction.signzy.app/api/v3/vehicle/challan-search'; // Replace with the target API endpoint
-        const apiKey = 'tzX1EcUIImhERr9YlSV196fwcqdxX9nt'; // Replace with your API key
+        const apiUrl = 'https://api.signzy.app/api/v3/vehicle/challan-search'; // Replace with the target API endpoint
+        const apiKey = 'pEw2o7mwR40E7UMg9Mws9d8bhMZRJxwL'; // Replace with your API key
         
 
         const payload = JSON.stringify({
@@ -47,8 +47,8 @@ module.exports = {
         const reqBody = body;
         const sessionId = reqBody['sessionId'];
         const otp = reqBody['otp'];
-        const apiUrl = 'https://api-preproduction.signzy.app/api/v3/vehicle/mh-challans'; // Replace with the target API endpoint
-        const apiKey = 'tzX1EcUIImhERr9YlSV196fwcqdxX9nt'; // Replace with your API key
+        const apiUrl = 'https://api.signzy.app/api/v3/vehicle/mh-challans'; // Replace with the target API endpoint
+        const apiKey = 'pEw2o7mwR40E7UMg9Mws9d8bhMZRJxwL'; // Replace with your API key
         
 
         const payload = JSON.stringify({

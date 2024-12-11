@@ -26,8 +26,12 @@ const authorController = require('../controllers/author');
 
 router.post("/", async (req, res, next) => {
     const rcData = await authorController.createAuthor(req.body)
+    if(rcData["error"]){
+        res.status(rcData['error']['status']).json(rcData)    
+        return;
+    }
     res.status(200).json({
-        message: "Record fetched successfully.",
+        message: "Request successfull.",
         data : rcData
     })
 });

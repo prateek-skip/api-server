@@ -46,6 +46,7 @@ module.exports = {
             return response.data;
         } catch (error) {
             console.error('Error calling API:', error.response?.data || error.message);
+            return error.response?.data || error.message;
         }
     
         

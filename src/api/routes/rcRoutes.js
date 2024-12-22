@@ -1,6 +1,6 @@
 const express = require('express');
 const router = express.Router();
-const authorController = require('../controllers/author');
+const rcController = require('../controllers/RC/RC');
 
 /**
  * GET request to /authors
@@ -25,7 +25,7 @@ const authorController = require('../controllers/author');
  */
 
 router.post("/", async (req, res, next) => {
-    const rcData = await authorController.createAuthor(req.body)
+    const rcData = await rcController.getRc(req.body)
     if(rcData["error"]){
         res.status(rcData['error']['status']).json(rcData)    
         return;

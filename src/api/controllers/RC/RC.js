@@ -1,9 +1,7 @@
 const axios = require('axios');
 
-const Author = require('../../models/Author');
-
 module.exports = {
-    createAuthor: async (body) => {
+    getRc: async (body) => {
         const reqBody = body;
         const regNo = reqBody['reg_no'];
         const consent = reqBody['consent'];
@@ -45,7 +43,7 @@ module.exports = {
     
             return response.data;
         } catch (error) {
-            console.error('Error calling API:', error.response?.data || error.message);
+            
             return error.response?.data || error.message;
         }
     

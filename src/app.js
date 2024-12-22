@@ -1,35 +1,17 @@
 const express = require('express');
 const app = express();
+process.env['NODE_TLS_REJECT_UNAUTHORIZED'] = 0;
 const bodyParser = require('body-parser');
 const winston = require('winston');
-const validApiKey = {'030faf4b-f8f0-4c8a-8ad6-c68fed9acb07':"cred",'aeded234-800e-4404-9fa6-8e0048dabdc1':"acko"}; // Replace with your actual API key
+const validApiKey = {'030faf4b-f8f0-4c8a-8ad6-c68fed9acb07':"cred",'aeded234-800e-4404-9fa6-8e0048dabdc1':"acko","20781877-e1b3-42b6-91f3-ce55318e5115":"verifyu"}; // Replace with your actual API key
 //routes 
-const authorsRoutes = require('./api/routes/authors');
-const challanRoutes = require('./api/routes/challan');
+const rcRoutes = require('./api/routes/rcRoutes');
+const challanRoutes = require('./api/routes/challanRoutes');
+const panRoutes = require('./api/routes/panRoutes')
 
 
 app.use(bodyParser.urlencoded({ extended: false }));
 app.use(bodyParser.json());
-
-
-// Middleware
-app.use(bodyParser.json());
-
-// API Key Validation Middleware
-const apiKeyValidation = (req, res, next) => {
-    const apiKey = req.header('x-api-key');
-
-
-
-    if (!validApiKey[apiKey]) {
-        return res.status(401).json({ error: 'Invalid or missing API key. Try again' });
-    }
-    next();
-};
-
-// Apply API Key Validation to all routes
-app.use(apiKeyValidation);
-
 
 // Create a Winston logger
 const logger = winston.createLogger({
@@ -44,6 +26,38 @@ const logger = winston.createLogger({
       new winston.transports.File({ filename: 'logs/api-usage.log' })
   ],
 });
+
+app.use(async (req, res, next) => {
+  const startTime = process.hrtime();
+  const apiKey = req.header('x-api-key');
+  res.on('finish', () => {
+      const elapsedTime = process.hrtime(startTime);
+      const elapsedTimeInMs = elapsedTime[0] * 1000 + elapsedTime[1] / 1e6;
+      logger.info(`Request to ${req.method} ${req.url} by ${validApiKey[apiKey]} took ${elapsedTimeInMs.toFixed(2)} ms`);
+  });
+
+  next();
+});
+
+// Middleware
+app.use(bodyParser.json());
+
+// API Key Validation Middleware
+const apiKeyValidation = (req, res, next) => {
+    const apiKey = req.header('x-api-key');
+
+    if (!validApiKey[apiKey]) {
+        logger.warn('Missing API Key in request headers');
+        return res.status(401).json({ error: 'Invalid or missing API key. Try again' });
+    }
+    next();
+};
+
+// Apply API Key Validation to all routes
+app.use(apiKeyValidation);
+
+
+
 
 app.use((req, res, next) => {
   const userId = req.headers['x-api-key']; // Assume user ID is passed in headers
@@ -77,8 +91,9 @@ app.use((req, res, next) => {
 
 
 
-app.use('/advance-rc', authorsRoutes);
+app.use('/advance-rc', rcRoutes);
 app.use('/challan', challanRoutes);
+app.use('/pan',panRoutes)
 
 
 // Error Handling Middleware

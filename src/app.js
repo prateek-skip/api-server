@@ -8,6 +8,7 @@ const validApiKey = {'030faf4b-f8f0-4c8a-8ad6-c68fed9acb07':"cred",'aeded234-800
 const rcRoutes = require('./api/routes/rcRoutes');
 const challanRoutes = require('./api/routes/challanRoutes');
 const panRoutes = require('./api/routes/panRoutes')
+const bureauRoutes = require('./api/routes/bureauRoutes')
 
 
 app.use(bodyParser.urlencoded({ extended: false }));
@@ -93,7 +94,8 @@ app.use((req, res, next) => {
 
 app.use('/advance-rc', rcRoutes);
 app.use('/challan', challanRoutes);
-app.use('/pan',panRoutes)
+app.use('/pan',panRoutes);
+app.use('/bureau',bureauRoutes);
 
 
 // Error Handling Middleware

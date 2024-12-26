@@ -7,7 +7,12 @@ const clientApiKeys = {
 const urlList = {
     "pan-supreme-v2": "https://pan-verification-supreme.befisc.com/v2",
     'pan-to-name':"https://pan-to-name-and-dob.befisc.com",
-    'pan-validate':"https://validate-pan.befisc.com/"
+    'pan-validate':"https://validate-pan.befisc.com/",
+    'phone-prefill':"https://api.signzy.app/api/v3/phonekyc/phone-prefill",
+    'phone-prefill-v2':'https://api.signzy.app/api/v3/phonekyc/phone-prefill-v2',
+    'phone-game-compliance':"https://api.signzy.app/api/v3/gaming/phone-onboarding",
+    'equifax-bureau':"https://api.signzy.app/api/v3/bureau/equifax_report",
+    'experian-bureau':"https://api.signzy.app/api/v3/bureau/experian-report"
 }
 
 module.exports = {clientApiKeys,urlList}

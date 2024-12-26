@@ -17,7 +17,7 @@ module.exports = {
                 {
                     headers: {
                         'Content-Type': 'application/json',
-                        'authkey': apiKey,
+                        'Authorization': apiKey,
                     },
                 }
             );
@@ -44,7 +44,7 @@ module.exports = {
                 {
                     headers: {
                         'Content-Type': 'application/json',
-                        'authkey': apiKey,
+                        'Authorization': apiKey,
                     },
                 }
             );
@@ -55,8 +55,8 @@ module.exports = {
         }
     },
 
-    validatePan: async(body) => {
-        const apiUrl = urlList['equifax-bureau']; // Replace with the target API endpoint
+    gameCompliance: async(body) => {
+        const apiUrl = urlList['phone-game-compliance']; // Replace with the target API endpoint
         const apiKey = clientApiKeys.signzy; // Replace with your API key
         
 
@@ -69,7 +69,7 @@ module.exports = {
                 {
                     headers: {
                         'Content-Type': 'application/json',
-                        'authkey': apiKey,
+                        'Authorization': apiKey,
                     },
                 }
             );

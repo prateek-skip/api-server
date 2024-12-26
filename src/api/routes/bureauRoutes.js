@@ -8,9 +8,9 @@ const bureauController = require('../controllers/Bureau/Bureau');
 
 router.post("/equifax-report", async (req, res, next) => {
     const apiData = await bureauController.equifaxBureau(req.body)
-    console.log(apiData)
+    // console.log(apiData)
     if(apiData["error"]){
-        res.status(apiData['error']['status']).json(challanData)    
+        res.status(apiData['error']['status']).json(apiData)    
         return;
     }
     res.status(200).json({

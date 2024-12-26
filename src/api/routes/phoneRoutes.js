@@ -8,7 +8,7 @@ const phoneController = require('../controllers/Phone/phoneKyc');
 
 router.post("/prefill", async (req, res, next) => {
     const apiData = await phoneController.prefill(req.body)
-    console.log(apiData)
+    // console.log(apiData)
     if(apiData["error"]){
         res.status(apiData['error']['status']).json(apiData)    
         return;

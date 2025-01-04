@@ -10,6 +10,10 @@ const challanRoutes = require('./api/routes/challanRoutes');
 const panRoutes = require('./api/routes/panRoutes')
 const phoneRoutes = require('./api/routes/phoneRoutes')
 const bureauRoutes = require('./api/routes/bureauRoutes')
+const aadharRoutes = require('./api/routes/aadharRoutes')
+const voterRoutes = require('./api/routes/voterRoutes')
+const passportRoutes = require('./api/routes/passportRoutes')
+const dlRoutes = require('./api/routes/drivingLicenseRoutes')
 
 
 app.use(bodyParser.urlencoded({ extended: false }));
@@ -98,6 +102,10 @@ app.use('/challan', challanRoutes);
 app.use('/pan',panRoutes);
 app.use('/phone',phoneRoutes)
 app.use('/bureau',bureauRoutes);
+app.use('/aadhar',aadharRoutes);
+app.use('/driving-license',dlRoutes);
+app.use('/voterID',voterRoutes);
+app.use('/passport',passportRoutes);
 
 
 // Error Handling Middleware

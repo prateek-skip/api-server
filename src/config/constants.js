@@ -12,7 +12,16 @@ const urlList = {
     'phone-prefill-v2':'https://api.signzy.app/api/v3/phonekyc/phone-prefill-v2',
     'phone-game-compliance':"https://api.signzy.app/api/v3/gaming/phone-onboarding",
     'equifax-bureau':"https://api.signzy.app/api/v3/bureau/equifax_report",
-    'experian-bureau':"https://api.signzy.app/api/v3/bureau/experian-report"
+    'experian-bureau':"https://api.signzy.app/api/v3/bureau/experian-report",
+    'aadhar-masking': "https://api.signzy.app/api/v3/aadhaar/extraction-masking",
+    'aadhar-verification': "https://api.signzy.app/api/v3/aadhaar/verify",
+    'pan-ocr-extraction': 'https://api.signzy.app/api/v3/pan/extractions',
+    'voterID-ocr-extraction': 'https://api.signzy.app/api/v3/voter-id/extractions',
+    'voterid-verification':'https://api.signzy.app/api/v3/voterid/verification',
+    'passport-ocr-extraction': 'https://api.signzy.app/api/v3/passport/extractions',
+    'passport-verification': 'https://api.signzy.app/api/v3/passport/verification',
+    'DL-verification':'https://api.signzy.app/api/v3/dl_/verification',
+    'DL-ocr-extraction':'https://api.signzy.app/api/v3/driving-license/extractions'
 }
 
 module.exports = {clientApiKeys,urlList}

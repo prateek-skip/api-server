@@ -8,9 +8,8 @@ const panController = require('../controllers/PAN/pan');
 
 router.post("/search", async (req, res, next) => {
     const apiData = await panController.searchPan(req.body)
-    console.log(apiData)
     if(apiData["error"]){
-        res.status(apiData['error']['status']).json(challanData)    
+        res.status(apiData['error']['status']).json(apiData)    
         return;
     }
     res.status(200).json({
@@ -33,6 +32,18 @@ router.post("/name-dob", async (req, res, next) => {
 
 router.post("/validate", async (req, res, next) => {
     const apiData = await panController.validatePan(req.body)
+    if(apiData["error"]){
+        res.status(apiData['error']['status']).json(apiData)    
+        return;
+    }
+    res.status(200).json({
+        message: "Request successfull.",
+        data : apiData
+    })
+});
+
+router.post("/extraction", async (req, res, next) => {
+    const apiData = await panController.extractPanOcr(req.body)
     if(apiData["error"]){
         res.status(apiData['error']['status']).json(apiData)    
         return;

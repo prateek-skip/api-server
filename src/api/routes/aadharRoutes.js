@@ -16,7 +16,7 @@ router.post("/mask-aadhar", async (req, res, next) => {
         message: "Request successfull.",
         data : apiData
     })
-});
+}); 
 
 router.post("/verify-aadhar", async (req, res, next) => {
     const apiData = await aadharController.verifyAadhar(req.body)
@@ -31,5 +31,28 @@ router.post("/verify-aadhar", async (req, res, next) => {
 });
 
 
+router.post("/send-otp", async (req, res, next) => {
+    const apiData = await aadharController.sendAadharOtp(req.body)
+    if(!apiData["result"]){
+        res.status(422).json({"message":apiData.message})    
+        return;
+    }
+    res.status(200).json({
+        message: "Request successfull.",
+        data :apiData.result
+    })
+});
+
+router.post("/download-aadhar", async (req, res, next) => {
+    const apiData = await aadharController.downloadAadhar(req.body)
+    if(!apiData["result"]){
+        res.status(500).json({"message":apiData.message})    
+        return;
+    }
+    res.status(200).json({
+        message: "Request successfull.",
+        "data":apiData.result
+    })
+});
 
 module.exports = router;

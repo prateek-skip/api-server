@@ -119,4 +119,30 @@ module.exports = {
             return error.response?.data || error.message
         }
     },
+
+    panVerification : async(body) => {
+
+        const apiUrl = urlList['pan-verification-v3']; // Replace with the target API endpoint
+        const apiKey = clientApiKeys.signzy; // Replace with your API key
+        
+
+        const payload = JSON.stringify(body);
+
+        try {
+            const response = await axios.post(
+                apiUrl,
+                payload,
+                {
+                    headers: {
+                        'Content-Type': 'application/json',
+                        'Authorization': apiKey,
+                    },
+                }
+            );
+            return response;
+        } catch (error) {   
+             console.error('Error calling API:', error);
+            return error.response?.data || error.message
+        }
+    },
 }

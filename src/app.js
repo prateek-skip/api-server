@@ -1,9 +1,11 @@
 const express = require('express');
 const app = express();
 process.env['NODE_TLS_REJECT_UNAUTHORIZED'] = 0;
-const bodyParser = require('body-parser');
-const winston = require('winston');
-const validApiKey = {'030faf4b-f8f0-4c8a-8ad6-c68fed9acb07':"cred",'aeded234-800e-4404-9fa6-8e0048dabdc1':"acko","20781877-e1b3-42b6-91f3-ce55318e5115":"verifyu"}; // Replace with your actual API key
+const bodyParser = require('body-parser'); // for parsing json
+const winston = require('winston'); // for logging
+
+const validApiKey = {'030faf4b-f8f0-4c8a-8ad6-c68fed9acb07':"cred",'aeded234-800e-4404-9fa6-8e0048dabdc1':"acko","20781877-e1b3-42b6-91f3-ce55318e5115":"verifyu", "affa04c5-99be-4d6b-b549-5ef05092c2fe":"scienaptic","881cd5bb-1f32-4ac7-a39a-7f336deca8e9":"zepto"}; // Replace with your actual API key
+
 //routes 
 const rcRoutes = require('./api/routes/rcRoutes');
 const challanRoutes = require('./api/routes/challanRoutes');
@@ -17,6 +19,7 @@ const dlRoutes = require('./api/routes/drivingLicenseRoutes')
 
 
 app.use(bodyParser.urlencoded({ extended: false }));
+// Middleware
 app.use(bodyParser.json());
 
 // Create a Winston logger
@@ -29,9 +32,25 @@ const logger = winston.createLogger({
       })
   ),
   transports: [
-      new winston.transports.File({ filename: 'logs/api-usage.log' })
+      new winston.transports.File({ filename: 'logs/api-usage-v2.log' })
   ],
 });
+
+
+
+app.use((req, res, next) => {
+  res.header("Access-Control-Allow-Origin", "*");
+  res.header(
+    "Access-Control-Allow-Headers",
+    "Origin, X-Requested-With, Content-Type, Accept, Authorization"
+  );
+  if (req.method === "OPTIONS") {
+    res.header("Access-Control-Allow-Methods", "PUT, POST, PATCH, DELETE, GET");
+    return res.status(200).json({});
+  }
+  next();
+});
+
 
 app.use(async (req, res, next) => {
   const startTime = process.hrtime();
@@ -45,8 +64,6 @@ app.use(async (req, res, next) => {
   next();
 });
 
-// Middleware
-app.use(bodyParser.json());
 
 // API Key Validation Middleware
 const apiKeyValidation = (req, res, next) => {
@@ -82,25 +99,12 @@ app.use((req, res, next) => {
 });
 
 
-app.use((req, res, next) => {
-    res.header("Access-Control-Allow-Origin", "*");
-    res.header(
-      "Access-Control-Allow-Headers",
-      "Origin, X-Requested-With, Content-Type, Accept, Authorization"
-    );
-    if (req.method === "OPTIONS") {
-      res.header("Access-Control-Allow-Methods", "PUT, POST, PATCH, DELETE, GET");
-      return res.status(200).json({});
-    }
-    next();
-});
-
 
 
 app.use('/advance-rc', rcRoutes);
 app.use('/challan', challanRoutes);
 app.use('/pan',panRoutes);
-app.use('/phone',phoneRoutes)
+app.use('/phone',phoneRoutes);
 app.use('/bureau',bureauRoutes);
 app.use('/aadhar',aadharRoutes);
 app.use('/driving-license',dlRoutes);

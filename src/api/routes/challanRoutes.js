@@ -1,6 +1,6 @@
 const express = require('express');
 const router = express.Router();
-const challanController = require('../controllers/challan');
+const challanController = require('../controllers/Challan/challan');
 
 /**
  * GET request to /books

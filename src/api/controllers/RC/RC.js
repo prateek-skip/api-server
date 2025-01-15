@@ -50,11 +50,11 @@ module.exports = {
         
     },
 
-    getAuthor: async (id) => {
+    getHistoricalAsync: async (id) => {
         // ..
     },
 
-    getAllAuthors: async() => {
+    getHistoricalData: async() => {
         // ...
     }
 }

@@ -35,6 +35,6 @@ router.post("/", async (req, res, next) => {
         data : rcData
     })
 });
-  
+
 
 module.exports = router;

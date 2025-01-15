@@ -54,5 +54,16 @@ router.post("/extraction", async (req, res, next) => {
     })
 });
 
+router.post("/verification-v1", async (req, res, next) => {
+    const apiData = await panController.panVerification(req.body)
+    if(apiData["error"]){
+        res.status(apiData['error']['statusCode']).json(apiData["error"])    
+        return;
+    }
+    res.status(200).json({
+        message: "Request successfull.",
+        data : apiData.data
+    })
+});
 
 module.exports = router;

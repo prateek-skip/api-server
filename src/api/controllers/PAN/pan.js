@@ -141,7 +141,6 @@ module.exports = {
             );
             return response;
         } catch (error) {   
-             console.error('Error calling API:', error);
             return error.response?.data || error.message
         }
     },

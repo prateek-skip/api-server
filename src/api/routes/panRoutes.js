@@ -56,7 +56,6 @@ router.post("/extraction", async (req, res, next) => {
 
 router.post("/verification-v1", async (req, res, next) => {
     const apiData = await panController.panVerification(req.body)
-    console.log('api-data',apiData);
     if(apiData["error"]){
         res.status(apiData['error']['statusCode']).json(apiData["error"])    
         return;

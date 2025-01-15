@@ -96,6 +96,7 @@ module.exports = {
                     },
                 }
             );
+            console.log(response)
             return response.data;
         } catch (error) {
             console.error('Error calling API:', error.response?.data || error.message);

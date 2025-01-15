@@ -51,6 +51,16 @@ app.use((req, res, next) => {
   next();
 });
 
+app.use((req, res, next) => {
+  if(req.method === 'GET'){
+    
+  next(error)
+  }
+  next()
+});
+
+
+
 
 app.use(async (req, res, next) => {
   const startTime = process.hrtime();
@@ -68,7 +78,6 @@ app.use(async (req, res, next) => {
 // API Key Validation Middleware
 const apiKeyValidation = (req, res, next) => {
     const apiKey = req.header('x-api-key');
-
     if (!validApiKey[apiKey]) {
         logger.warn('Missing API Key in request headers');
         return res.status(401).json({ error: 'Invalid or missing API key. Try again' });
@@ -91,7 +100,7 @@ app.use((req, res, next) => {
       return res.status(400).json({ error: 'User ID is required' });
   }
 
-  const logMessage = `User ${validApiKey[userId]} with API key ${userId} accessed ${apiPath}`;
+  const logMessage = `User ${validApiKey[userId]} with API key accessed ${apiPath}`;
   logger.info(logMessage);
   // console.log(logMessage); // Optional: Log to console as well
 

@@ -49,6 +49,10 @@ router.post("/download-aadhar", async (req, res, next) => {
         res.status(500).json({"message":apiData.message})    
         return;
     }
+    if(apiData['status']===2){
+        res.status(200).json({"message":apiData.message})    
+        return;
+    }
     res.status(200).json({
         message: "Request successfull.",
         "data":apiData.result

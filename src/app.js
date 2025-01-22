@@ -90,26 +90,6 @@ app.use(apiKeyValidation);
 
 
 
-
-app.use((req, res, next) => {
-  const userId = req.headers['x-api-key']; // Assume user ID is passed in headers
-  const apiPath = req.path;
-
-  if (!userId) {
-      logger.warn('Missing API Key in request headers');
-      return res.status(400).json({ error: 'User ID is required' });
-  }
-
-  const logMessage = `User ${validApiKey[userId]} with API key accessed ${apiPath}`;
-  logger.info(logMessage);
-  // console.log(logMessage); // Optional: Log to console as well
-
-  next();
-});
-
-
-
-
 app.use('/advance-rc', rcRoutes);
 app.use('/challan', challanRoutes);
 app.use('/pan',panRoutes);
@@ -126,6 +106,23 @@ app.use((req, res, next) => {
   const error = new Error('Endpoint Not Found');
   error.status = 404;
   next(error);
+});
+
+
+app.use((req, res, next) => {
+  const userId = req.headers['x-api-key']; // Assume user ID is passed in headers
+  const apiPath = req.path;
+
+  if (!userId) {
+      logger.warn('Missing API Key in request headers');
+      return res.status(400).json({ error: 'User ID is required' });
+  }
+
+  const logMessage = `User ${validApiKey[userId]} with API key accessed ${apiPath}`;
+  logger.info(logMessage);
+  // console.log(logMessage); // Optional: Log to console as well
+
+  next();
 });
 
 app.use((error, req, res, next) => {

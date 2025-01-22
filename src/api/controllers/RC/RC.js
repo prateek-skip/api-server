@@ -7,7 +7,8 @@ module.exports = {
         const consent = reqBody['consent'];
         const consentText = reqBody['consent_text'];
 
-        const apiUrl = 'https://vehicle-rc-verification-api3.p.rapidapi.com/api/v1/private/rc-v1'; // Replace with the target API endpoint
+        // const apiUrl = 'https://vehicle-rc-verification-api3.p.rapidapi.com/api/v1/private/rc-v1'; // Replace with the target API endpoint
+        const apiUrl = 'https://vehicle-rc-verification-api3.p.rapidapi.com/api/v1/private/rc-plus'
         const apiKey = '476c9ca7f8msh28e7762dd9db0f0p11fca4jsnc3b0fbfbb4d2'; // Replace with your API key
         
 

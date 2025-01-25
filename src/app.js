@@ -1,10 +1,17 @@
 const express = require('express');
+
 const app = express();
 process.env['NODE_TLS_REJECT_UNAUTHORIZED'] = 0;
 const bodyParser = require('body-parser'); // for parsing json
 const winston = require('winston'); // for logging
 
-const validApiKey = {'030faf4b-f8f0-4c8a-8ad6-c68fed9acb07':"cred",'aeded234-800e-4404-9fa6-8e0048dabdc1':"acko","20781877-e1b3-42b6-91f3-ce55318e5115":"verifyu", "affa04c5-99be-4d6b-b549-5ef05092c2fe":"scienaptic","881cd5bb-1f32-4ac7-a39a-7f336deca8e9":"zepto"}; // Replace with your actual API key
+const validApiKey = {
+  '030faf4b-f8f0-4c8a-8ad6-c68fed9acb07':"cred",
+  'aeded234-800e-4404-9fa6-8e0048dabdc1':"acko",
+  "20781877-e1b3-42b6-91f3-ce55318e5115":"verifyu", 
+  "affa04c5-99be-4d6b-b549-5ef05092c2fe":"scienaptic",
+  "881cd5bb-1f32-4ac7-a39a-7f336deca8e9":"zepto"
+}; // Replace with your actual API key
 
 //routes 
 const rcRoutes = require('./api/routes/rcRoutes');

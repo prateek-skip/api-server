@@ -18,6 +18,10 @@
   },
   "homepage": "https://github.com/Shadid12/starter_node#readme",
   "dependencies": {
+    "@opentelemetry/api": "^1.6.0",
+    "@opentelemetry/auto-instrumentations-node": "^0.39.4",
+    "@opentelemetry/exporter-trace-otlp-http": "^0.45.0",
+    "@opentelemetry/sdk-node": "^0.45.0",
     "axios": "^1.7.8",
     "body-parser": "^1.19.0",
     "dotenv": "^8.2.0",

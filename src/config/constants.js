@@ -24,7 +24,9 @@ const urlList = {
     'passport-ocr-extraction': 'https://api.signzy.app/api/v3/passport/extractions',
     'passport-verification': 'https://api.signzy.app/api/v3/passport/verification',
     'DL-verification':'https://api.signzy.app/api/v3/dl_/verification',
-    'DL-ocr-extraction':'https://api.signzy.app/api/v3/driving-license/extractions'
+    'DL-ocr-extraction':'https://api.signzy.app/api/v3/driving-license/extractions',
+    'signzy-detailed-vehicle-search' : 'https://api.signzy.app/api/v3/vehicle/detailedsearches',
+    'aiten-rc-plus': 'https://vehicle-rc-verification-api3.p.rapidapi.com/api/v1/private/rc-plus'
 }
 
 module.exports = {clientApiKeys,urlList}

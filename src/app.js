@@ -10,7 +10,8 @@ const validApiKey = {
   'aeded234-800e-4404-9fa6-8e0048dabdc1':"acko",
   "20781877-e1b3-42b6-91f3-ce55318e5115":"verifyu", 
   "affa04c5-99be-4d6b-b549-5ef05092c2fe":"scienaptic",
-  "881cd5bb-1f32-4ac7-a39a-7f336deca8e9":"zepto"
+  "881cd5bb-1f32-4ac7-a39a-7f336deca8e9":"zepto",
+  "27d8cfbb-320f-4ccd-879f-f02dab578cd3":"signzy"
 }; // Replace with your actual API key
 
 //routes 

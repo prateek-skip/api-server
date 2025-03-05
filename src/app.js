@@ -5,6 +5,8 @@ process.env['NODE_TLS_REJECT_UNAUTHORIZED'] = 0;
 const bodyParser = require('body-parser'); // for parsing json
 const winston = require('winston'); // for logging
 
+
+
 const validApiKey = {
   '030faf4b-f8f0-4c8a-8ad6-c68fed9acb07':"cred",
   'aeded234-800e-4404-9fa6-8e0048dabdc1':"acko",
@@ -17,7 +19,6 @@ const validApiKey = {
   "83dd55ac-bd92-440e-af23-fcddb5de7a10":"Client2",
   "63aaeb2d-9890-4d7a-8643-d5850aff21db":"Client3",
   "7254039b-a84b-4d80-88cb-869b1f10d629":"Client4"
-  
 }; // Replace with your actual API key
 
 //routes 
@@ -30,6 +31,8 @@ const aadharRoutes = require('./api/routes/aadharRoutes')
 const voterRoutes = require('./api/routes/voterRoutes')
 const passportRoutes = require('./api/routes/passportRoutes')
 const dlRoutes = require('./api/routes/drivingLicenseRoutes')
+
+const batchRoute = require('./test/test')
 
 
 app.use(bodyParser.urlencoded({ extended: false }));
@@ -113,6 +116,7 @@ app.use('/aadhar',aadharRoutes);
 app.use('/driving-license',dlRoutes);
 app.use('/voterID',voterRoutes);
 app.use('/passport',passportRoutes);
+app.use('/process/rc/batch',batchRoute)
 
 
 // Error Handling Middleware

@@ -28,6 +28,7 @@
     "express": "^4.17.1",
     "mongoose": "^5.8.0",
     "nodemon": "^2.0.1",
+    "p-limit": "^6.2.0",
     "winston": "^3.17.0"
   }
 }

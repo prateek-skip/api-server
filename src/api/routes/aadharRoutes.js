@@ -7,7 +7,7 @@ const aadharController = require('../controllers/Aadhar/aadharController');
  */
 
 router.post("/mask-aadhar", async (req, res, next) => {
-    const apiData = await aadharController.maskAadhar(req.body)
+    const apiData  = await aadharController.maskAadhar(req.body)
     if(apiData["error"]){
         res.status(apiData['error']['status']).json(apiData)    
         return;

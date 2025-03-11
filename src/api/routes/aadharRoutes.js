@@ -32,10 +32,10 @@ router.post("/verify-aadhar", async (req, res, next) => {
 
 router.post("/send-otp", async (req, res, next) => {
   const apiData = await aadharController.sendAadharOtp(req.body);
-  if (!apiData["result"]) {
-    res.status(422).json({ message: apiData.message });
-    return;
-  }
+  //   if (!apiData["result"]) {
+  //     res.status(422).json({ message: apiData.message });
+  //     return;
+  //   }
   res.status(200).json({
     message: "Request successfull.",
     data: apiData,

@@ -23,6 +23,7 @@ module.exports = {
             );
             return response.data;
         } catch (error) {
+            logger.error(error)
             return error.response?.data || error.message
         }
     },
@@ -47,6 +48,7 @@ module.exports = {
             );
             return response.data;
         } catch (error) {
+            logger.error(error)
             return error.response?.data || error.message
         }
     },
@@ -71,6 +73,7 @@ module.exports = {
             );
             return response.data;
         } catch (error) {
+            logger.error(error)
             return error.response?.data || error.message
         }
     },
@@ -94,6 +97,7 @@ module.exports = {
             );
             return response.data;
         } catch (error) {
+            logger.error(error)
             return error.response?.data || error.message
         }
     },

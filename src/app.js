@@ -3,7 +3,8 @@ const express = require('express');
 const app = express();
 process.env['NODE_TLS_REJECT_UNAUTHORIZED'] = 0;
 const bodyParser = require('body-parser'); // for parsing json
-const winston = require('winston'); // for logging
+// const winston = require('winston'); // for logging
+const {logger, requestLogger, errorLogger } = require('./api/logger/logger');
 
 const validApiKey = {
   '030faf4b-f8f0-4c8a-8ad6-c68fed9acb07':"cred",
@@ -36,19 +37,19 @@ app.use(bodyParser.urlencoded({ extended: false }));
 // Middleware
 app.use(bodyParser.json());
 
-// Create a Winston logger
-const logger = winston.createLogger({
-  level: 'info',
-  format: winston.format.combine(
-      winston.format.timestamp(),
-      winston.format.printf(({ timestamp, level, message }) => {
-          return `${timestamp} [${level.toUpperCase()}]: ${message}`;
-      })
-  ),
-  transports: [
-      new winston.transports.File({ filename: 'logs/api-usage-v2.log' })
-  ],
-});
+// // Create a Winston logger
+// const logger = winston.createLogger({
+//   level: 'info',
+//   format: winston.format.combine(
+//       winston.format.timestamp(),
+//       winston.format.printf(({ timestamp, level, message }) => {
+//           return `${timestamp} [${level.toUpperCase()}]: ${message}`;
+//       })
+//   ),
+//   transports: [
+//       new winston.transports.File({ filename: 'logs/api-usage-v2.log' })
+//   ],
+// });
 
 
 
@@ -75,19 +76,35 @@ app.use((req, res, next) => {
 
 
 
+// app.use(async (req, res, next) => {
+//   const startTime = process.hrtime();
+//   const apiKey = req.header('x-api-key');
+//   res.on('finish', () => {
+//       const elapsedTime = process.hrtime(startTime);
+//       const elapsedTimeInMs = elapsedTime[0] * 1000 + elapsedTime[1] / 1e6;
+//       logger.info(`Request to ${req.method} ${req.url} by ${validApiKey[apiKey]} took ${elapsedTimeInMs.toFixed(2)} ms`);
+//   });
 
-app.use(async (req, res, next) => {
-  const startTime = process.hrtime();
-  const apiKey = req.header('x-api-key');
-  res.on('finish', () => {
-      const elapsedTime = process.hrtime(startTime);
-      const elapsedTimeInMs = elapsedTime[0] * 1000 + elapsedTime[1] / 1e6;
-      logger.info(`Request to ${req.method} ${req.url} by ${validApiKey[apiKey]} took ${elapsedTimeInMs.toFixed(2)} ms`);
-  });
+//   next();
+// });
+
+
+
+app.use((req, res, next) => {
+  const userId = req.headers['x-api-key']; // Assume user ID is passed in headers
+  const apiPath = req.path;
+
+  if (!userId) {
+      logger.info('Missing API Key in request headers');
+      return res.status(400).json({ error: 'API key is required' });
+  }
+
+  const logMessage = `User ${validApiKey[userId]} with API key accessed ${apiPath}`;
+  logger.info(logMessage);
+  // console.log(logMessage); // Optional: Log to console as well
 
   next();
 });
-
 
 // API Key Validation Middleware
 const apiKeyValidation = (req, res, next) => {
@@ -102,6 +119,8 @@ const apiKeyValidation = (req, res, next) => {
 // Apply API Key Validation to all routes
 app.use(apiKeyValidation);
 
+app.use(requestLogger);
+
 
 
 app.use('/advance-rc', rcRoutes);
@@ -113,6 +132,7 @@ app.use('/aadhar',aadharRoutes);
 app.use('/driving-license',dlRoutes);
 app.use('/voterID',voterRoutes);
 app.use('/passport',passportRoutes);
+// app.use('/testlink',passportRoutes);
 
 
 // Error Handling Middleware
@@ -123,21 +143,6 @@ app.use((req, res, next) => {
 });
 
 
-app.use((req, res, next) => {
-  const userId = req.headers['x-api-key']; // Assume user ID is passed in headers
-  const apiPath = req.path;
-
-  if (!userId) {
-      logger.warn('Missing API Key in request headers');
-      return res.status(400).json({ error: 'User ID is required' });
-  }
-
-  const logMessage = `User ${validApiKey[userId]} with API key accessed ${apiPath}`;
-  logger.info(logMessage);
-  // console.log(logMessage); // Optional: Log to console as well
-
-  next();
-});
 
 app.use((error, req, res, next) => {
   res.status(error.status || 500);
@@ -147,6 +152,9 @@ app.use((error, req, res, next) => {
       },
   });
 });
+
+app.use(errorLogger); // Logs errors
+
 
 
 module.exports = app;

@@ -44,14 +44,14 @@ router.post("/send-otp", async (req, res, next) => {
 
 router.post("/download-aadhar", async (req, res, next) => {
   const apiData = await aadharController.downloadAadhar(req.body);
-  if (!apiData["result"]) {
-    res.status(500).json({ message: apiData.message });
-    return;
-  }
-  if (apiData["status"] === 2) {
-    res.status(200).json({ message: apiData.message });
-    return;
-  }
+  //   if (!apiData["result"]) {
+  //     res.status(500).json({ message: apiData.message });
+  //     return;
+  //   }
+  //   if (apiData["status"] === 2) {
+  //     res.status(200).json({ message: apiData.message });
+  //     return;
+  //   }
   res.status(200).json({
     message: "Request successfull.",
     data: apiData,

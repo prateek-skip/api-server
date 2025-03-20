@@ -4,7 +4,7 @@ const app = express();
 process.env['NODE_TLS_REJECT_UNAUTHORIZED'] = 0;
 const bodyParser = require('body-parser'); // for parsing json
 // const winston = require('winston'); // for logging
-const {logger, requestLogger, errorLogger } = require('./api/logger/logger');
+const {logger } = require('./api/logger/logger');
 
 const validApiKey = {
   '030faf4b-f8f0-4c8a-8ad6-c68fed9acb07':"cred",
@@ -119,7 +119,7 @@ const apiKeyValidation = (req, res, next) => {
 // Apply API Key Validation to all routes
 app.use(apiKeyValidation);
 
-app.use(requestLogger);
+// app.use(requestLogger);
 
 
 
@@ -145,6 +145,10 @@ app.use((req, res, next) => {
 
 
 app.use((error, req, res, next) => {
+  logger.error(error.message, {
+    correlationId: req.correlationId,
+    requestBody: error,
+  })
   res.status(error.status || 500);
   res.json({
       error: {
@@ -153,7 +157,7 @@ app.use((error, req, res, next) => {
   });
 });
 
-app.use(errorLogger); // Logs errors
+// app.use(errorLogger); // Logs errors
 
 
 

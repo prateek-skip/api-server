@@ -1,7 +1,8 @@
 const clientApiKeys = {
     "aiten":"476c9ca7f8msh28e7762dd9db0f0p11fca4jsnc3b0fbfbb4d2",
     "signzy":"pEw2o7mwR40E7UMg9Mws9d8bhMZRJxwL",
-    "befisc":"0HLJ1NX0T5Z25O3"
+    "befisc":"0HLJ1NX0T5Z25O3",
+    "befisc-prod":"LU07LK9CPCGR5NJ"
 }
 
 const urlList = {
@@ -29,4 +30,4 @@ const urlList = {
     'aiten-rc-plus': 'https://vehicle-rc-verification-api3.p.rapidapi.com/api/v1/private/rc-plus'
 }
 
-module.exports = {clientApiKeys,urlList}
+module.exports = {clientApiKeys,urlList}  

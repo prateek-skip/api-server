@@ -44,7 +44,7 @@ module.exports = {
 
   sendAadharOtp: async (body) => {
     const apiUrl = urlList["aadhar-okyc"]; // Replace with the target API endpoint
-    const apiKey = clientApiKeys.befisc; // Replace with your API key
+    const apiKey = clientApiKeys['befisc-prod']; // Replace with your API key
 
     const payload = JSON.stringify(body);
 
@@ -64,7 +64,7 @@ module.exports = {
 
   downloadAadhar: async (body) => {
     const apiUrl = urlList["aadhar-otp-download"]; // Replace with the target API endpoint
-    const apiKey = clientApiKeys.befisc; // Replace with your API key
+    const apiKey = clientApiKeys['befisc-prod']; // Replace with your API key
 
     const payload = JSON.stringify(body);
 

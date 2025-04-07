@@ -8,7 +8,7 @@ const upload = multer({ dest: 'uploads/' });
 router.post("/mmv-master-mapping", upload.single('file'), async (req, res, next) => {
   try {
     const apiData = await handleMasterMappingBatch(req, res);
-    console.log(apiData);
+    // console.log(apiData);
 
     // res.status(200).json({
     //   message: "Request successful.",

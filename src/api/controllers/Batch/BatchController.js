@@ -37,7 +37,7 @@ const transformResponse = (response, originalPayload, isError) => {
     return originalPayload;
   }
 
-  const result = response.result;
+  const result = response.result.mmvVariantMapping;
   const cleanedResponse = cleanMmvResponse(result);
   const parsedResponse = JSON.parse(cleanedResponse);
 

@@ -31,6 +31,7 @@ const aadharRoutes = require('./api/routes/aadharRoutes')
 const voterRoutes = require('./api/routes/voterRoutes')
 const passportRoutes = require('./api/routes/passportRoutes')
 const dlRoutes = require('./api/routes/drivingLicenseRoutes')
+const batchRoutes = require('./api/routes/batchRoutes')
 
 
 app.use(bodyParser.urlencoded({ extended: false }));
@@ -132,6 +133,7 @@ app.use('/aadhar',aadharRoutes);
 app.use('/driving-license',dlRoutes);
 app.use('/voterID',voterRoutes);
 app.use('/passport',passportRoutes);
+app.use('/batch',batchRoutes)
 // app.use('/testlink',passportRoutes);
 
 

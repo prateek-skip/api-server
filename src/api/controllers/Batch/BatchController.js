@@ -19,7 +19,7 @@ const cleanMmvResponse = (response) => {
     }));
     return JSON.stringify(filtered);
   }
-  return response;
+  return JSON.stringify(response);
 };
 
 const limiter = new Bottleneck({
@@ -77,7 +77,7 @@ const callApiWithRetry = async (payload, retries = 3) => {
       } else {
         // console.error('❌ Final failure:', err.message);
         // console.error('❌ Final failure:', err.response?.data);
-        return transformResponse(err.response?.data?.error || 'Unknown error', originalPayload, true);
+        return transformResponse(err.response?.data?.error || err.message || 'Unknown error', originalPayload, true);
       }
     }
   }

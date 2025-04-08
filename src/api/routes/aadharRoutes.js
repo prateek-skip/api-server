@@ -46,7 +46,7 @@ router.post("/send-otp", async (req, res, next) => {
     const duration = Date.now() - start;
     logger.info(
       `Outgoing response: ${req.method} ${req.originalUrl} ${res.statusCode} - ${duration}ms`,
-      { correlationId: req.correlationId, requestBody: apiData }
+      { correlationId: req.correlationId, requestBody: {"billable":apiData.billable, "txn_id":apiData.txn_id, "status":apiData.status} }
     );
 
     res.status(200).json({
@@ -76,7 +76,7 @@ router.post("/download-aadhar", async (req, res, next) => {
     const duration = Date.now() - start;
     logger.info(
       `Outgoing response: ${req.method} ${req.originalUrl} ${res.statusCode} - ${duration}ms`,
-      { correlationId: req.correlationId, requestBody: apiData }
+      { correlationId: req.correlationId, requestBody: {"billable":apiData.billable, "txn_id":apiData.txn_id, "status":apiData.status} }
     );
 
     res.status(200).json({

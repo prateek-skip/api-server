@@ -2,7 +2,7 @@ const axios = require('axios');
 const { urlList, clientApiKeys } = require('../../../config/constants');
 const { aitenObj, keyMapping } = require('../../../models/RCModel');
 
-const timeout = 5000;
+// const timeout = 5000;
 
 
 // Function to map Object2 values to Object1 keys
@@ -37,7 +37,7 @@ function setValueByKeyPath(obj, keyPath, value) {
 // Function to perform a POST request with a timeout
 const postWithTimeout = async (url, data,headers, timeout) => {
     try {
-        const response = await axios.post(url, data, {headers, timeout }); // Set timeout in ms
+        const response = await axios.post(url, data, {headers}); // Set timeout in ms
         return response.data;
     } catch (error) {
         throw new Error(`Error posting to ${url}: ${error.message}`);
@@ -47,8 +47,9 @@ const postWithTimeout = async (url, data,headers, timeout) => {
 // Function to try the first URL and fallback to the second
 const postWithFallback = async (request1, request2, timeout) => {
     try {
-        return await postWithTimeout(request1.url, request1.payload,request1.headers, timeout); // Try the first URL
+        return await postWithTimeout(request1.url, request1.payload,request1.headers); // Try the first URL
     } catch (error) {
+        console.log('second');
         const response = await postWithTimeout(request2.url, request2.payload,request2.headers, timeout); // Fallback to the second URL
         return mapValues(aitenObj,response,keyMapping)
     }
@@ -76,7 +77,7 @@ module.exports = {
         request1.headers = {
             'Content-Type': 'application/json',
             'x-rapidapi-host': 'vehicle-rc-verification-api3.p.rapidapi.com',
-            'x-rapidapi-key': clientApiKeys['aiten']
+            'apiKey': clientApiKeys['aiten']
         };
 
         request2.url = urlList['signzy-detailed-vehicle-search'];
@@ -92,10 +93,14 @@ module.exports = {
 
 
         try {
-            const response = await postWithFallback(request1,request2,timeout);
-    
-            return response;
+            // const response = await postWithFallback(request1,request2);
+            
+            // return response;
+
+            const response = await axios.post(request1.url, request1.payload, {headers:request1.headers}); // Set timeout in ms
+            return response.data;
         } catch (error) {
+            console.log(error)
             return error.response?.data || {"error":"Server error","message":'Server is facing some issue right now. Please try again.'};
         }
         

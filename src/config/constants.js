@@ -1,5 +1,5 @@
 const clientApiKeys = {
-    "aiten":"476c9ca7f8msh28e7762dd9db0f0p11fca4jsnc3b0fbfbb4d2",
+    "aiten":"u01tVjB24tBYoR",
     "signzy":"pEw2o7mwR40E7UMg9Mws9d8bhMZRJxwL",
     "befisc":"0HLJ1NX0T5Z25O3",
     "befisc-prod":"LU07LK9CPCGR5NJ"
@@ -27,7 +27,7 @@ const urlList = {
     'DL-verification':'https://api.signzy.app/api/v3/dl_/verification',
     'DL-ocr-extraction':'https://api.signzy.app/api/v3/driving-license/extractions',
     'signzy-detailed-vehicle-search' : 'https://api.signzy.app/api/v3/vehicle/detailedsearches',
-    'aiten-rc-plus': 'https://vehicle-rc-verification-api3.p.rapidapi.com/api/v1/private/rc-plus'
+    'aiten-rc-plus': 'https://api.aitanlabs.com/api/v1/private/rc-plus'
 }
 
 module.exports = {clientApiKeys,urlList}  

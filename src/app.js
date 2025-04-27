@@ -69,10 +69,19 @@ app.use((req, res, next) => {
   next();
 });
 
+
+app.use(function(req, res, next) {
+  res.set('Server', 'webserver');
+  next();
+});
+
 app.use((req, res, next) => {
-  if(req.method === 'GET'){
-    
-  next(error)
+  if(req.method !== "POST"){
+    res.status(405).json({
+      error: 'Method Not Allowed',
+      message: `Only POST requests are allowed.`,
+  });
+    next(error)
   }
   next()
 });
@@ -124,10 +133,6 @@ app.use(apiKeyValidation);
 
 // app.use(requestLogger);
 
-app.use(function(req, res, next) {
-  res.set('Server', 'webserver');
-  next();
-});
 
 
 app.use('/advance-rc', rcRoutes);

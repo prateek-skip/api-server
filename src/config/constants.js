@@ -1,6 +1,7 @@
 const clientApiKeys = {
     "aiten":"u01tVjB24tBYoR",
     "signzy":"pEw2o7mwR40E7UMg9Mws9d8bhMZRJxwL",
+    'signzy-preprod':"EqJQn7v9FMQMXJXcbFUuww9ZCgsmPNES",
     "befisc":"0HLJ1NX0T5Z25O3",
     "befisc-prod":"LU07LK9CPCGR5NJ"
 }
@@ -27,7 +28,8 @@ const urlList = {
     'DL-verification':'https://api.signzy.app/api/v3/dl_/verification',
     'DL-ocr-extraction':'https://api.signzy.app/api/v3/driving-license/extractions',
     'signzy-detailed-vehicle-search' : 'https://api.signzy.app/api/v3/vehicle/detailedsearches',
-    'aiten-rc-plus': 'https://api.aitanlabs.com/api/v1/private/rc-plus'
+    'aiten-rc-plus': 'https://api.aitanlabs.com/api/v1/private/rc-plus',
+    'pf-passbook-without-otp': 'https://api-preproduction.signzy.app/api/v3/underwriting/uan-passbook-without-otp-v2'
 }
 
 module.exports = {clientApiKeys,urlList}  

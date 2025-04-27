@@ -17,7 +17,8 @@ const validApiKey = {
   "037b699f-d07d-4ac4-a007-6821923f2c64":"Client1",
   "83dd55ac-bd92-440e-af23-fcddb5de7a10":"Client2",
   "63aaeb2d-9890-4d7a-8643-d5850aff21db":"Client3",
-  "7254039b-a84b-4d80-88cb-869b1f10d629":"Client4"
+  "7254039b-a84b-4d80-88cb-869b1f10d629":"Client4",
+  "2e9c62d8-7e41-4f0e-b8aa-a07544447c54":"Digio"
   
 }; // Replace with your actual API key
 
@@ -32,6 +33,7 @@ const voterRoutes = require('./api/routes/voterRoutes')
 const passportRoutes = require('./api/routes/passportRoutes')
 const dlRoutes = require('./api/routes/drivingLicenseRoutes')
 const batchRoutes = require('./api/routes/batchRoutes')
+const uanRoutes = require('./api/routes/uanRoutes')
 
 
 app.use(bodyParser.urlencoded({ extended: false }));
@@ -133,7 +135,8 @@ app.use('/aadhar',aadharRoutes);
 app.use('/driving-license',dlRoutes);
 app.use('/voterID',voterRoutes);
 app.use('/passport',passportRoutes);
-app.use('/batch',batchRoutes)
+app.use('/batch',batchRoutes);
+app.use('/epfo',uanRoutes);
 // app.use('/testlink',passportRoutes);
 
 

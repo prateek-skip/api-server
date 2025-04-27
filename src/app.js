@@ -124,6 +124,10 @@ app.use(apiKeyValidation);
 
 // app.use(requestLogger);
 
+app.use(function(req, res, next) {
+  res.set('Server', 'webserver');
+  next();
+});
 
 
 app.use('/advance-rc', rcRoutes);

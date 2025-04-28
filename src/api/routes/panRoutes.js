@@ -8,7 +8,7 @@ const uuid = require("uuid")
  * GET request to /books
  */
 
-router.post("/search", async (req, res, next) => {
+router.post("/ultra", async (req, res, next) => {
     try {
         req.correlationId = uuid.v4();
         otherLogger.info(`Incoming request: ${req.method} ${req.originalUrl}`, {

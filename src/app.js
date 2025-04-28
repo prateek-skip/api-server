@@ -18,8 +18,8 @@ const validApiKey = {
   "83dd55ac-bd92-440e-af23-fcddb5de7a10":"Client2",
   "63aaeb2d-9890-4d7a-8643-d5850aff21db":"Client3",
   "7254039b-a84b-4d80-88cb-869b1f10d629":"Client4",
-  "fbd7c9d4-f250-40d2-9097-e9d6f6f38caf":"Digio"
-  
+  "fbd7c9d4-f250-40d2-9097-e9d6f6f38caf":"Digio",
+  "7586e6f0-2b27-4a20-b37b-dcc3e9b3d18a":"IntexM_Media"
 }; // Replace with your actual API key
 
 //routes 
@@ -54,7 +54,7 @@ app.use(bodyParser.json());
 //   ],
 // });
 
-
+ 
 
 app.use((req, res, next) => {
   res.header("Access-Control-Allow-Origin", "*");

@@ -1,5 +1,6 @@
 const axios = require("axios");
 const { urlList, clientApiKeys } = require("../../../config/constants");
+const logger = require("../../logger/logger");
 
 module.exports = {
   maskAadhar: async (body) => {

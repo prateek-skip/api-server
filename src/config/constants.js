@@ -29,7 +29,9 @@ const urlList = {
     'DL-ocr-extraction':'https://api.signzy.app/api/v3/driving-license/extractions',
     'signzy-detailed-vehicle-search' : 'https://api.signzy.app/api/v3/vehicle/detailedsearches',
     'aiten-rc-plus': 'https://api.aitanlabs.com/api/v1/private/rc-plus',
-    'pf-passbook-without-otp': 'https://api-preproduction.signzy.app/api/v3/underwriting/uan-passbook-without-otp-v2'
+    'pf-passbook-without-otp': 'https://api-preproduction.signzy.app/api/v3/underwriting/uan-passbook-without-otp-v2',
+    'challan-search': 'https://api.signzy.app/api/v3/vehicle/challan-search',
+    'mh-challan-search': 'https://api.signzy.app/api/v3/vehicle/mh-challan-search',
 }
 
 module.exports = {clientApiKeys,urlList}  

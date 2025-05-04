@@ -1,4 +1,5 @@
 const axios = require('axios');
+const { urlList, clientApiKeys } = require('../../../config/constants');
 
 module.exports = {
     searchChallan: async (body) => {
@@ -9,8 +10,8 @@ module.exports = {
         const phoneNumber = reqBody['phoneNoforOtpMH']
         const statePortals = reqBody['statePortal']
 
-        const apiUrl = 'https://api.signzy.app/api/v3/vehicle/challan-search'; // Replace with the target API endpoint
-        const apiKey = 'pEw2o7mwR40E7UMg9Mws9d8bhMZRJxwL'; // Replace with your API key
+        const apiUrl = urlList['challan-search']; // Replace with the target API endpoint
+        const apiKey = clientApiKeys.signzy;// Replace with your API key
         
 
         const payload = JSON.stringify({
@@ -47,8 +48,8 @@ module.exports = {
         const reqBody = body;
         const sessionId = reqBody['sessionId'];
         const otp = reqBody['otp'];
-        const apiUrl = 'https://api.signzy.app/api/v3/vehicle/mh-challans'; // Replace with the target API endpoint
-        const apiKey = 'pEw2o7mwR40E7UMg9Mws9d8bhMZRJxwL'; // Replace with your API key
+        const apiUrl = urlList['mh-challan-search']; // Replace with the target API endpoint
+        const apiKey = clientApiKeys.signzy;
         
 
         const payload = JSON.stringify({

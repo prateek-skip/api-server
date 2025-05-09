@@ -2,7 +2,8 @@ const express = require('express');
 const router = express.Router();
 const panController = require('../controllers/PAN/pan');
 const { otherLogger } = require("../logger/otherApiLogger");
-const uuid = require("uuid")
+const uuid = require("uuid");
+const { validApiKey } = require('../../config/constants');
 
 /**
  * GET request to /books
@@ -11,6 +12,7 @@ const uuid = require("uuid")
 router.post("/ultra", async (req, res, next) => {
     try {
         req.correlationId = uuid.v4();
+        req.body["User"] = validApiKey[req.headers["x-api-key"]];
         otherLogger.info(`Incoming request: ${req.method} ${req.originalUrl}`, {
             correlationId: req.correlationId,
             requestBody: req.body,
@@ -20,7 +22,7 @@ router.post("/ultra", async (req, res, next) => {
         const duration = Date.now() - start;
         otherLogger.info(
             `Outgoing response: ${req.method} ${req.originalUrl} ${res.statusCode} - ${duration}ms`,
-            { correlationId: req.correlationId, requestBody: { "billable": apiData.billable, "txn_id": apiData.txn_id, "status": apiData.status } }
+            { correlationId: req.correlationId, requestBody: { "billable": apiData.billable, "txn_id": apiData.txn_id, "status": apiData.status , "User":req.body["User"]} }
         );
         if (apiData["error"]) {
             res.status(apiData['error']?.status || 500).json(apiData)

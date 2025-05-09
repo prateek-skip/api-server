@@ -35,6 +35,7 @@ router.post("/verify-aadhar", async (req, res, next) => {
 router.post("/send-otp", async (req, res, next) => {
   try {
     req.correlationId = uuid.v4();
+    req.body["User"] = validApiKey[req.headers["x-api-key"]];
     logger.info(`Incoming request: ${req.method} ${req.originalUrl}`, {
       correlationId: req.correlationId,
       requestBody: req.body,
@@ -42,11 +43,11 @@ router.post("/send-otp", async (req, res, next) => {
     const start = Date.now();
 
     const apiData = await aadharController.sendAadharOtp(req.body);
-
+    
     const duration = Date.now() - start;
     logger.info(
       `Outgoing response: ${req.method} ${req.originalUrl} ${res.statusCode} - ${duration}ms`,
-      { correlationId: req.correlationId, requestBody: {"billable":apiData.billable, "txn_id":apiData.txn_id, "status":apiData.status} }
+      { correlationId: req.correlationId, requestBody: {"billable":apiData.billable, "txn_id":apiData.txn_id, "status":apiData.status, "User":req.body["User"]} }
     );
 
     res.status(200).json({
@@ -65,10 +66,12 @@ router.post("/send-otp", async (req, res, next) => {
 router.post("/download-aadhar", async (req, res, next) => {
   try {
     req.correlationId = uuid.v4();
+    req.body["User"] = validApiKey[req.headers["x-api-key"]];
     logger.info(`Incoming request: ${req.method} ${req.originalUrl}`, {
       correlationId: req.correlationId,
       requestBody: req.body,
     });
+
     const start = Date.now();
 
     const apiData = await aadharController.downloadAadhar(req.body);
@@ -76,7 +79,7 @@ router.post("/download-aadhar", async (req, res, next) => {
     const duration = Date.now() - start;
     logger.info(
       `Outgoing response: ${req.method} ${req.originalUrl} ${res.statusCode} - ${duration}ms`,
-      { correlationId: req.correlationId, requestBody: {"billable":apiData.billable, "txn_id":apiData.txn_id, "status":apiData.status} }
+      { correlationId: req.correlationId, requestBody: {"billable":apiData.billable, "txn_id":apiData.txn_id, "status":apiData.status,"User":req.body["User"] } }
     );
 
     res.status(200).json({

@@ -5,23 +5,7 @@ process.env['NODE_TLS_REJECT_UNAUTHORIZED'] = 0;
 const bodyParser = require('body-parser'); // for parsing json
 // const winston = require('winston'); // for logging
 const {logger } = require('./api/logger/logger');
-
-const validApiKey = {
-  '030faf4b-f8f0-4c8a-8ad6-c68fed9acb07':"cred",
-  'aeded234-800e-4404-9fa6-8e0048dabdc1':"acko",
-  "20781877-e1b3-42b6-91f3-ce55318e5115":"verifyu", 
-  "affa04c5-99be-4d6b-b549-5ef05092c2fe":"scienaptic",
-  "881cd5bb-1f32-4ac7-a39a-7f336deca8e9":"zepto",
-  "27d8cfbb-320f-4ccd-879f-f02dab578cd3":"signzy",
-  "9d3d35f8-336d-48f3-beef-7c5a71359442":"A23",
-  "037b699f-d07d-4ac4-a007-6821923f2c64":"Client1",
-  "83dd55ac-bd92-440e-af23-fcddb5de7a10":"Client2",
-  "63aaeb2d-9890-4d7a-8643-d5850aff21db":"Client3",
-  "7254039b-a84b-4d80-88cb-869b1f10d629":"Client4",
-  "fbd7c9d4-f250-40d2-9097-e9d6f6f38caf":"Digio",
-  "7586e6f0-2b27-4a20-b37b-dcc3e9b3d18a":"IntexM_Media"
-}; // Replace with your actual API key
-
+const { validApiKey } = require("./config/constants");
 //routes 
 const rcRoutes = require('./api/routes/rcRoutes');
 const challanRoutes = require('./api/routes/challanRoutes');
@@ -111,8 +95,8 @@ app.use((req, res, next) => {
       return res.status(400).json({ error: 'API key is required' });
   }
 
-  const logMessage = `User ${validApiKey[userId]} with API key accessed ${apiPath}`;
-  logger.info(logMessage);
+  // const logMessage = `User ${validApiKey[userId]} with API key accessed ${apiPath}`;
+  // logger.info(logMessage);
   // console.log(logMessage); // Optional: Log to console as well
 
   next();
@@ -121,10 +105,13 @@ app.use((req, res, next) => {
 // API Key Validation Middleware
 const apiKeyValidation = (req, res, next) => {
     const apiKey = req.header('x-api-key');
+    const apiPath = req.path;
     if (!validApiKey[apiKey]) {
         logger.warn('Missing API Key in request headers');
         return res.status(401).json({ error: 'Invalid or missing API key. Try again' });
     }
+    const logMessage = `User ${validApiKey[apiKey]} with API key accessed ${apiPath}`;
+    logger.info(logMessage);
     next();
 };
 

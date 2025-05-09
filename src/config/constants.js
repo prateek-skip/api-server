@@ -49,7 +49,8 @@ const validApiKey = {
   "7254039b-a84b-4d80-88cb-869b1f10d629":"Client4",
   "fbd7c9d4-f250-40d2-9097-e9d6f6f38caf":"Digio",
   "7586e6f0-2b27-4a20-b37b-dcc3e9b3d18a":"IntexM_Media",
-  "7b96acea-85f9-40b9-9f40-0aecd90d0438":"CashFree"
+  "7b96acea-85f9-40b9-9f40-0aecd90d0438":"CashFree",
+  "ebcc8385-931e-48a8-b222-205eda113b69":"GoKiwi"
 }; // Replace with your actual API key
 
 

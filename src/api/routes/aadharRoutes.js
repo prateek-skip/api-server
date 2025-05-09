@@ -2,6 +2,7 @@ const express = require("express");
 const router = express.Router();
 const aadharController = require("../controllers/Aadhar/aadharController");
 const { logger } = require("../logger/logger");
+const { validApiKey } = require('../../config/constants');
 const uuid = require("uuid")
 
 /**

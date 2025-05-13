@@ -3,20 +3,33 @@ const router = express.Router();
 const panController = require('../controllers/PAN/pan');
 const { otherLogger } = require("../logger/otherApiLogger");
 const uuid = require("uuid");
-const { validApiKey } = require('../../config/constants');
+const { validApiKey, statusToHttpMapBefisc } = require('../../config/constants');
+const { isValidPAN } = require('../../config/utilities');
 
 /**
  * GET request to /books
  */
 
 router.post("/ultra", async (req, res, next) => {
-    try {
+    try {const panNumber = req.body.pan;
         req.correlationId = uuid.v4();
         req.body["User"] = validApiKey[req.headers["x-api-key"]];
         otherLogger.info(`Incoming request: ${req.method} ${req.originalUrl}`, {
             correlationId: req.correlationId,
             requestBody: req.body,
         });
+        if (!isValidPAN(panNumber)) {
+            res.status(400).json({
+                "message": "Request failed.",
+                "data": {
+                    "billable": false,
+                    "message": "Invalid PAN",
+                    "result": {}
+                },
+            });
+            return;
+        }
+        
         const start = Date.now();
         const apiData = await panController.searchPan(req.body)
         const duration = Date.now() - start;
@@ -30,8 +43,15 @@ router.post("/ultra", async (req, res, next) => {
         }
         delete apiData["api_name"];
         delete apiData["api_category"];
-        res.status(200).json({
-            message: "Request successfull.",
+
+        const httpCode = statusToHttpMapBefisc[apiData.status].httpCode || 200;
+        const respMessage = statusToHttpMapBefisc[apiData.status].description || "Request successful.";
+
+        delete apiData?.status;
+
+        delete apiData?.message;
+        res.status(httpCode).json({
+            message: respMessage,
             data: apiData,
         });
     } catch (error) {
@@ -63,6 +83,18 @@ router.post("/validate", async (req, res, next) => {
             correlationId: req.correlationId,
             requestBody: req.body,
         });
+
+        if (!isValidPAN(panNumber)) {
+            res.status(400).json({
+                "message": "Request failed.",
+                "data": {
+                    "billable": false,
+                    "message": "Invalid PAN",
+                    "result": {}
+                },
+            });
+            return;
+        }
         const start = Date.now();
         const apiData = await panController.validatePan(req.body)
         const duration = Date.now() - start;
@@ -77,8 +109,18 @@ router.post("/validate", async (req, res, next) => {
             res.status(apiData['error']?.status || 500).json(apiData)
             return;
         }
-        res.status(200).json({
-            message: "Request successfull.",
+        
+        delete apiData["api_name"];
+        delete apiData["api_category"];
+
+        const httpCode = statusToHttpMapBefisc[apiData.status].httpCode || 200;
+        const respMessage = statusToHttpMapBefisc[apiData.status].description || "Request successful.";
+
+        delete apiData?.status;
+
+        delete apiData?.message;
+        res.status(httpCode).json({
+            message: respMessage,
             data: apiData,
         });
     } catch (error) {

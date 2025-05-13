@@ -54,4 +54,31 @@ const validApiKey = {
 }; // Replace with your actual API key
 
 
-module.exports = {clientApiKeys,urlList, validApiKey };
+  
+const statusToHttpMapAiten = {
+  100: { description: 'Active PAN', billable: true, httpCode: 200 },
+  101: { description: 'Inactive PAN', billable: true, httpCode: 200 },
+  102: { description: 'Record not found', billable: true, httpCode: 404 },
+  400: { description: 'Invalid Input Parameter', billable: false, httpCode: 400 },
+  500: { description: 'Internal Server Error', billable: false, httpCode: 500 },
+  503: { description: 'Source Down', billable: false, httpCode: 409 },
+  504: { description: 'Gateway Timeout', billable: false, httpCode: 504 },
+  502: { description: 'Bad Gateway', billable: false, httpCode: 502 },
+  403: {description: 'Rate Limited', billable: false, httpCode: 429},
+};
+
+const statusToHttpMapBefisc = {
+  1: { description: 'Active PAN', billable: true, httpCode: 200 },
+  3: { description: 'Inactive PAN', billable: true, httpCode: 200 },
+  2: { description: 'PAN not found', billable: true, httpCode: 404 },
+  301: { description: 'Invalid Input Parameter', billable: false, httpCode: 400 },
+  500: { description: 'Internal Server Error', billable: false, httpCode: 500 },
+  401: { description: 'Internal Server Error', billable: false, httpCode: 500 },
+  402: { description: 'Internal Server Error', billable: false, httpCode: 500 },
+  302: { description: 'Source Down', billable: false, httpCode: 409 },
+  504: { description: 'Gateway Timeout', billable: false, httpCode: 504 },
+  502: { description: 'Bad Gateway', billable: false, httpCode: 502 },
+  403: {description: 'Rate Limited', billable: false, httpCode: 429},
+};
+
+module.exports = {clientApiKeys,urlList, validApiKey , statusToHttpMapBefisc, statusToHttpMapAiten};

@@ -6,7 +6,7 @@ module.exports = {
         const panNo = body['pan'];
 
         const apiUrl = urlList['pan-supreme-v2']; // Replace with the target API endpoint
-        const apiKey = clientApiKeys.befisc; // Replace with your API key
+        const apiKey = clientApiKeys['befisc-prod']; // Replace with your API key
         
 
         const payload = JSON.stringify({
@@ -37,7 +37,7 @@ module.exports = {
         const panNo = body['pan'];
 
         const apiUrl = urlList['pan-to-name']; // Replace with the target API endpoint
-        const apiKey = clientApiKeys.befisc; // Replace with your API key
+        const apiKey = clientApiKeys['befisc-prod']; // Replace with your API key
         
 
         const payload = JSON.stringify({
@@ -67,7 +67,7 @@ module.exports = {
         const panNo = body['pan'];
 
         const apiUrl = urlList['pan-validate']; // Replace with the target API endpoint
-        const apiKey = clientApiKeys.befisc; // Replace with your API key
+        const apiKey = clientApiKeys['befisc-prod']; // Replace with your API key
         
 
         const payload = JSON.stringify({

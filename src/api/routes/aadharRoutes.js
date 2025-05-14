@@ -89,6 +89,50 @@ router.post("/download-aadhar", async (req, res, next) => {
     });
 
     const start = Date.now();
+    // const aadharNumber = req.body.aadhaar;
+    // if (!isValidAadhaar(aadharNumber)) {
+    //   res.status(400).json({
+    //     "message": "Request failed.",
+    //     "data": {
+    //       "billable": false,
+    //       "message": "Invalid Aadhar number.",
+    //       "result": {}
+    //     },
+    //   });
+    //   return;
+    // }
+    const apiData = await aadharController.downloadAadhar(req.body);
+
+    const duration = Date.now() - start;
+    logger.info(
+      `Outgoing response: ${req.method} ${req.originalUrl} ${res.statusCode} - ${duration}ms`,
+      { correlationId: req.correlationId, requestBody: { "billable": apiData.billable, "txn_id": apiData.txn_id, "status": apiData.status, "User": req.body["User"] } }
+    );
+
+    res.status(200).json({
+      message: "Request successfull.",
+      data: apiData,
+    });
+  } catch (error) {
+    logger.error(
+      `Error response: ${req.method} ${req.originalUrl} ${res.statusCode}`,
+      { correlationId: req.correlationId, requestBody: error.message }
+    );
+    next(error);
+  }
+});
+
+
+router.post("/detailed/send-otp", async (req, res, next) => {
+  try {
+    req.correlationId = uuid.v4();
+    req.body["User"] = validApiKey[req.headers["x-api-key"]];
+    logger.info(`Incoming request: ${req.method} ${req.originalUrl}`, {
+      correlationId: req.correlationId,
+      requestBody: req.body,
+    });
+    const start = Date.now();
+
     const aadharNumber = req.body.aadhaar;
     if (!isValidAadhaar(aadharNumber)) {
       res.status(400).json({
@@ -101,7 +145,8 @@ router.post("/download-aadhar", async (req, res, next) => {
       });
       return;
     }
-    const apiData = await aadharController.downloadAadhar(req.body);
+
+    const apiData = await aadharController.sendAadharOtpDetailed(req.body);
 
     const duration = Date.now() - start;
     logger.info(
@@ -133,17 +178,17 @@ router.post("/download-aadhar/detailed", async (req, res, next) => {
 
     const start = Date.now();
     const aadharNumber = req.body.aadhaar;
-    if (!isValidAadhaar(aadharNumber)) {
-      res.status(400).json({
-        "message": "Request failed.",
-        "data": {
-          "billable": false,
-          "message": "Invalid Aadhar number.",
-          "result": {}
-        },
-      });
-      return;
-    }
+    // if (!isValidAadhaar(aadharNumber)) {
+    //   res.status(400).json({
+    //     "message": "Request failed.",
+    //     "data": {
+    //       "billable": false,
+    //       "message": "Invalid Aadhar number.",
+    //       "result": {}
+    //     },
+    //   });
+    //   return;
+    // }
     const apiData = await aadharController.downloadAadharDetailed(req.body);
 
     const duration = Date.now() - start;

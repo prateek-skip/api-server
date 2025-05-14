@@ -19,6 +19,7 @@ const urlList = {
     'aadhar-verification': "https://api.signzy.app/api/v3/aadhaar/verify",
     'aadhar-okyc' : 'https://aadhaar-xml-send-otp.befisc.com/',
     'aadhar-otp-download' : 'https://aadhaar-xml-download.befisc.com/',
+    'aadhaar-xml-with-eaadhaar-send-otp' : 'https://kyc.befisc.com/aadhaar-xml-with-eaadhaar/send-otp',
     'aadhaar-xml-with-eaadhaar-download' : 'https://kyc.befisc.com/aadhaar-xml-with-eaadhaar/downlaod',
     'pan-ocr-extraction': 'https://api.signzy.app/api/v3/pan/extractions',
     'pan-verification-v3':"https://api.signzy.app/api/v3/pan/pan-verification-v3",

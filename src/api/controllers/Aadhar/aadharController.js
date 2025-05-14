@@ -84,6 +84,26 @@ module.exports = {
     }
   },
 
+  sendAadharOtpDetailed: async (body) => {
+    const apiUrl = urlList["aadhaar-xml-with-eaadhaar-send-otp"]; // Replace with the target API endpoint
+    const apiKey = clientApiKeys['befisc-prod']; // Replace with your API key
+
+    const payload = JSON.stringify(body);
+
+    try {
+      const response = await axios.post(apiUrl, payload, {
+        headers: {
+          "Content-Type": "application/json",
+          authkey: apiKey,
+        },
+      });
+      return response.data;
+    } catch (error) {
+      logger.error(error);
+      return error.response?.data || error.message;
+    }
+  },
+
   downloadAadharDetailed: async (body) => {
     const apiUrl = urlList["aadhaar-xml-with-eaadhaar-download"]; // Replace with the target API endpoint
     const apiKey = clientApiKeys['befisc-prod']; // Replace with your API key

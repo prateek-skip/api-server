@@ -89,18 +89,18 @@ router.post("/download-aadhar", async (req, res, next) => {
     });
 
     const start = Date.now();
-    const aadharNumber = req.body.aadhaar;
-    if (!isValidAadhaar(aadharNumber)) {
-      res.status(400).json({
-        "message": "Request failed.",
-        "data": {
-          "billable": false,
-          "message": "Invalid Aadhar number.",
-          "result": {}
-        },
-      });
-      return;
-    }
+    // const aadharNumber = req.body.aadhaar;
+    // if (!isValidAadhaar(aadharNumber)) {
+    //   res.status(400).json({
+    //     "message": "Request failed.",
+    //     "data": {
+    //       "billable": false,
+    //       "message": "Invalid Aadhar number.",
+    //       "result": {}
+    //     },
+    //   });
+    //   return;
+    // }
     const apiData = await aadharController.downloadAadhar(req.body);
 
     const duration = Date.now() - start;
@@ -178,17 +178,17 @@ router.post("/download-aadhar/detailed", async (req, res, next) => {
 
     const start = Date.now();
     const aadharNumber = req.body.aadhaar;
-    if (!isValidAadhaar(aadharNumber)) {
-      res.status(400).json({
-        "message": "Request failed.",
-        "data": {
-          "billable": false,
-          "message": "Invalid Aadhar number.",
-          "result": {}
-        },
-      });
-      return;
-    }
+    // if (!isValidAadhaar(aadharNumber)) {
+    //   res.status(400).json({
+    //     "message": "Request failed.",
+    //     "data": {
+    //       "billable": false,
+    //       "message": "Invalid Aadhar number.",
+    //       "result": {}
+    //     },
+    //   });
+    //   return;
+    // }
     const apiData = await aadharController.downloadAadharDetailed(req.body);
 
     const duration = Date.now() - start;

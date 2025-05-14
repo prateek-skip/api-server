@@ -11,7 +11,8 @@ const { isValidPAN } = require('../../config/utilities');
  */
 
 router.post("/ultra", async (req, res, next) => {
-    try {const panNumber = req.body.pan;
+    try {
+        const panNumber = req.body.pan;
         req.correlationId = uuid.v4();
         req.body["User"] = validApiKey[req.headers["x-api-key"]];
         otherLogger.info(`Incoming request: ${req.method} ${req.originalUrl}`, {

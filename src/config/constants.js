@@ -3,7 +3,7 @@ const clientApiKeys = {
     "signzy":"pEw2o7mwR40E7UMg9Mws9d8bhMZRJxwL",
     'signzy-preprod':"EqJQn7v9FMQMXJXcbFUuww9ZCgsmPNES",
     "befisc":"0HLJ1NX0T5Z25O3",
-    "befisc-prod":"LU07LK9CPCGR5NJ"
+    "befisc-prod":"0YSMRTHWPR387E6"
 }
 
 const urlList = {
@@ -19,6 +19,7 @@ const urlList = {
     'aadhar-verification': "https://api.signzy.app/api/v3/aadhaar/verify",
     'aadhar-okyc' : 'https://aadhaar-xml-send-otp.befisc.com/',
     'aadhar-otp-download' : 'https://aadhaar-xml-download.befisc.com/',
+    'aadhaar-xml-with-eaadhaar-download' : 'https://kyc.befisc.com/aadhaar-xml-with-eaadhaar/downlaod',
     'pan-ocr-extraction': 'https://api.signzy.app/api/v3/pan/extractions',
     'pan-verification-v3':"https://api.signzy.app/api/v3/pan/pan-verification-v3",
     'voterID-ocr-extraction': 'https://api.signzy.app/api/v3/voter-id/extractions',

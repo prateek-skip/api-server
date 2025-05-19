@@ -53,7 +53,8 @@ const validApiKey = {
   "7586e6f0-2b27-4a20-b37b-dcc3e9b3d18a":"IntexM_Media",
   "7b96acea-85f9-40b9-9f40-0aecd90d0438":"CashFree",
   "ebcc8385-931e-48a8-b222-205eda113b69":"GoKiwi",
-  "9a100360-a852-40e6-8600-53ed3b2dcd25":"Cleartax"
+  "9a100360-a852-40e6-8600-53ed3b2dcd25":"Cleartax",
+  "c1fbc23b-0b86-410f-b821-ccb8b1b38166":"Amazon"
 }; // Replace with your actual API key
 
 

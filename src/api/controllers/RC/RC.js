@@ -70,7 +70,7 @@ module.exports = {
         request1.payload = JSON.stringify({
             "reg_no": regNo,
             "consent": consent,
-            "consent_text": consentText
+            "consent_text": 'I hear by declare my consent agreement for fetching my information via AITAN Labs API'
         });
 
         request1.url = urlList['aiten-rc-plus'];

@@ -41,7 +41,7 @@ const winston = require('winston'); // for logging
   
   // Transport for request and response logs (non-error)
   const requestTransport = new winston.transports.File({
-    filename: 'logs/otherRequests-9may.log',
+    filename: 'logs/otherRequests-20may.log',
     level: 'info',
     format: winston.format.combine(
       infoFilter(),
@@ -54,7 +54,7 @@ const winston = require('winston'); // for logging
   
   // Transport for error logs
   const errorTransport = new winston.transports.File({
-    filename: 'logs/otherErrors-9may.log',
+    filename: 'logs/otherErrors-20may.log',
     level: 'error',
     format: winston.format.combine(
       winston.format.timestamp(),

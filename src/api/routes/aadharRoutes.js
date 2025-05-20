@@ -73,7 +73,7 @@ router.post("/send-otp", async (req, res, next) => {
   } catch (error) {
     logger.error(
       `Error response: ${req.method} ${req.originalUrl} ${res.statusCode}`,
-      { correlationId: req.correlationId, requestBody: error.message }
+      { correlationId: req.correlationId, requestBody: error }
     );
     next(error);
   }
@@ -116,7 +116,7 @@ router.post("/download-aadhar", async (req, res, next) => {
   } catch (error) {
     logger.error(
       `Error response: ${req.method} ${req.originalUrl} ${res.statusCode}`,
-      { correlationId: req.correlationId, requestBody: error.message }
+      { correlationId: req.correlationId, requestBody: error }
     );
     next(error);
   }
@@ -161,7 +161,7 @@ router.post("/detailed/send-otp", async (req, res, next) => {
   } catch (error) {
     logger.error(
       `Error response: ${req.method} ${req.originalUrl} ${res.statusCode}`,
-      { correlationId: req.correlationId, requestBody: error.message }
+      { correlationId: req.correlationId, requestBody: error }
     );
     next(error);
   }
@@ -206,7 +206,7 @@ router.post("/download-aadhar/detailed", async (req, res, next) => {
   } catch (error) {
     logger.error(
       `Error response: ${req.method} ${req.originalUrl} ${res.statusCode}`,
-      { correlationId: req.correlationId, requestBody: error.message }
+      { correlationId: req.correlationId, requestBody: error }
     );
     next(error);
   }

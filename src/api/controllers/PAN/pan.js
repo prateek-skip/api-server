@@ -7,7 +7,6 @@ module.exports = {
 
         const apiUrl = urlList['pan-supreme-v2']; // Replace with the target API endpoint
         const apiKey = clientApiKeys['befisc-prod']; // Replace with your API key
-        
 
         const payload = JSON.stringify({
             "pan": panNo
@@ -26,7 +25,6 @@ module.exports = {
             );
             return response.data;
         } catch (error) {
-            console.error('Error calling API:', error.response?.data || error.message);
             return error.response?.data || error.message
         }
     
@@ -58,7 +56,6 @@ module.exports = {
     
             return {message:response.data.message,"result":response.data.result};
         } catch (error) {   
-             console.error('Error calling API:', error);
             return error.response?.data || error.message
         }
     },
@@ -115,7 +112,6 @@ module.exports = {
     
             return {message:response.data.message,"result":response.data.result};
         } catch (error) {   
-             console.error('Error calling API:', error);
             return error.response?.data || error.message
         }
     },

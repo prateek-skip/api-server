@@ -58,7 +58,7 @@ router.post("/ultra", async (req, res, next) => {
     } catch (error) {
         otherLogger.error(
             `Error response: ${req.method} ${req.originalUrl} ${res.statusCode}`,
-            { correlationId: req.correlationId, requestBody: error.message }
+            { correlationId: req.correlationId, requestBody: error }
           );
           next(error);
     }
@@ -127,7 +127,7 @@ router.post("/validate", async (req, res, next) => {
     } catch (error) {
         otherLogger.error(
             `Error response: ${req.method} ${req.originalUrl} ${res.statusCode}`,
-            { correlationId: req.correlationId, requestBody: error.message }
+            { correlationId: req.correlationId, requestBody: error }
           );
           next(error);
     }

@@ -1,6 +1,6 @@
 const axios = require("axios");
 const { urlList, clientApiKeys } = require("../../../config/constants");
-const logger = require("../../logger/logger");
+const {logger} = require("../../logger/logger");
 
 module.exports = {
   maskAadhar: async (body) => {
@@ -18,8 +18,10 @@ module.exports = {
       });
       return response.data;
     } catch (error) {
-      logger.error(error);
-      return error.response?.data || error.message;
+
+      throw error;
+      // logger.error(error);
+      // return error.response?.data || error.message;
     }
   },
 
@@ -38,8 +40,10 @@ module.exports = {
       });
       return response.data;
     } catch (error) {
-      logger.error(error);
-      return error.response?.data || error.message;
+
+      throw error;
+      // logger.error(error);
+      // return error.response?.data || error.message;
     }
   },
 
@@ -58,8 +62,10 @@ module.exports = {
       });
       return response.data;
     } catch (error) {
-      logger.error(error);
-      return error.response?.data || error.message;
+
+      throw error;
+      // logger.error(error);
+      // return error.response?.data || error.message;
     }
   },
 
@@ -79,8 +85,10 @@ module.exports = {
       //   console.log(response);
       return response.data;
     } catch (error) {
-      logger.error(error);
-      return error.response?.data || error.message;
+      // logger.error(error);
+
+      throw error;
+      // return error.response?.data || error.message;
     }
   },
 
@@ -99,8 +107,10 @@ module.exports = {
       });
       return response.data;
     } catch (error) {
-      logger.error(error);
-      return error.response?.data || error.message;
+      // logger.error(error);
+
+      throw error;
+      // return error.response?.data || error.message;
     }
   },
 
@@ -118,10 +128,12 @@ module.exports = {
         },
       });
       //   console.log(response);
+      // throw new Error("Timestamp is not in IST (+05:30)");
       return response.data;
     } catch (error) {
-      logger.error(error);
-      return error.response?.data || error.message;
+      // logger.error(error);
+      throw error;
+      // return error.response?.data || error.message;
     }
   },
 };
